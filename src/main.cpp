@@ -8,6 +8,16 @@
 #include "properties/properties.h"
 #include "api/api.h"
 
+// API REST configuration.
+String API_HOST = "https://www.postb.in/1721489816868-3559819755610";
+String API_KEY = "4cae8c84-dd29-42f3-8d58-ed371f1bc8ef";
+
+// Device configuration.
+String DEVICE_ID = "01J384NT10XHVGYDRXJSXRVAPK";
+
+// Enable/Disable Auto Watering.
+bool AUTO_WATERING = false;
+
 Devices device;
 Motors motor;
 

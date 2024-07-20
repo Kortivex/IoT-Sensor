@@ -5,7 +5,7 @@ Motors::Motors() {
     pixels = new Adafruit_NeoPixel(1, RGB_PIN, NEO_GRB + NEO_KHZ800);
 }
 
-void Motors::Run() {
+void Motors::Run() const {
     // IO18 is initialized as RGB pixel pin, and IO19 is initialized as motor drive pin.
     Serial.println("Initialize IO18 as RGB pixel pin, and IO19 as motor drive pin.");
 
@@ -16,7 +16,7 @@ void Motors::Run() {
     digitalWrite(MOTOR_PIN, LOW);
 }
 
-void Motors::InitRGBSequence() {
+void Motors::InitRGBSequence() const {
     if (this->pixels != nullptr) {
         // IO18 is initialized as RGB pixel pin.
         this->pixels->begin();
@@ -42,7 +42,7 @@ void Motors::InitRGBSequence() {
     }
 }
 
-void Motors::MotorButtonTriggered(bool value) {
+void Motors::MotorButtonTriggered(bool value) const {
     Serial.println("Motor Button Triggered: " + String((value) ? "true" : "false"));
     digitalWrite(MOTOR_PIN, value);
 
@@ -52,7 +52,7 @@ void Motors::MotorButtonTriggered(bool value) {
     }
 }
 
-void Motors::WateringCallback(Dashboard &dashboard, bool value) {
+void Motors::WateringCallback(Dashboard &dashboard, bool value) const {
     Serial.println("Motor Button Triggered: " + String((value) ? "true" : "false"));
     digitalWrite(MOTOR_PIN, value);
 

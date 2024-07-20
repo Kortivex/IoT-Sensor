@@ -30,7 +30,7 @@ bool Properties::GetSaltSensorEvent(iot_sensors_event_t &val) {
 bool Properties::GetVoltageSensorEvent(iot_sensors_event_t &val) {
     int vRef = 1100;
     uint16_t volt = analogRead(BAT_ADC);
-    val.voltage = ((float) volt / 4095.0) * 6.6 * (vRef);
+    val.voltage = static_cast<float>((static_cast<double>(volt) / 4095.0) * 6.6 * vRef);
 
     return true;
 }

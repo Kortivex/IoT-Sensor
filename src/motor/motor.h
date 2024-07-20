@@ -17,11 +17,11 @@ public:
 
     Motors();
 
-    void Run();
+    void Run() const;
 
-    void InitRGBSequence();
+    void InitRGBSequence() const;
 
-    void MotorButtonTriggered(bool value);
+    void MotorButtonTriggered(bool value) const;
 
-    void WateringCallback(Dashboard &dashboard, bool value);
+    void WateringCallback(Dashboard &dashboard, bool value) const;
 };

@@ -1,11 +1,11 @@
 #include "api.h"
 
-API::API(String apiHost, String apiKey) {
+API::API(String &apiHost, String &apiKey) {
     this->ApiHost = apiHost;
     this->ApiKey = apiKey;
 }
 
-void API::PostSensorData(String id, String data) const {
+void API::PostSensorData(String &id, String &data) const {
     if (WiFiClass::status() == WL_CONNECTED) {
         WiFiClientSecure client;
         client.setInsecure();
@@ -20,7 +20,7 @@ void API::PostSensorData(String id, String data) const {
     }
 }
 
-void API::PostSensorConnectionData(String id, String data) const {
+void API::PostSensorConnectionData(String &id, String &data) const {
     if (WiFiClass::status() == WL_CONNECTED) {
         WiFiClientSecure client;
         client.setInsecure();
