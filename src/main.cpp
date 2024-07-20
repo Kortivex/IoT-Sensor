@@ -6,10 +6,13 @@
 #include "dashboard/dashboard.h"
 #include "motor/motor.h"
 #include "properties/properties.h"
+#include "api/api.h"
 
 Devices device;
 Motors motor;
+
 Dashboard dashboard(80);
+API api(API_HOST, API_KEY);
 
 uint64_t timestamp = 0;
 
@@ -97,17 +100,23 @@ void loop() {
 
         if (device.has_bmeSensor) {
             Properties::GetBME280SensorEvent(device, val);
-            dashboard.bmeTemperature->update(val.temperature);
-            dashboard.bmeHumidity->update(val.humidity);
+            dashboard.bmeTemperature->update(val.temperature_in);
+            dashboard.bmeHumidity->update(val.humidity_in);
             dashboard.bmeAltitude->update(val.altitude);
             dashboard.bmePressure->update(val.pressure);
         }
 
         if (device.has_sht3xSensor) {
             Properties::GetSHT3xSensorEvent(device, val);
-            dashboard.sht3xTemperature->update(val.temperature);
-            dashboard.sht3xHumidity->update(val.humidity);
+            dashboard.sht3xTemperature->update(val.temperature_out);
+            dashboard.sht3xHumidity->update(val.humidity_out);
         }
+
+        String properties = Properties::GenerateJSONData(val);
+        api.PostSensorData(DEVICE_ID, properties);
+
+        String wifi = Properties::GenerateJSONWifiData();
+        api.PostSensorConnectionData(DEVICE_ID, wifi);
 
         dashboard.espDash.sendUpdates();
     }
