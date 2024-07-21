@@ -9,7 +9,7 @@
 #include "api/api.h"
 
 // API REST configuration.
-String API_HOST = "https://www.postb.in/1721489816868-3559819755610";
+String API_HOST = "https://www.postb.in/1721561966898-8253190442919";
 String API_KEY = "4cae8c84-dd29-42f3-8d58-ed371f1bc8ef";
 
 // Device configuration.
@@ -17,6 +17,9 @@ String DEVICE_ID = "01J384NT10XHVGYDRXJSXRVAPK";
 
 // Enable/Disable Auto Watering.
 bool AUTO_WATERING = false;
+
+// Enable/Disable Send Data to API REST.
+bool API_SEND_DATA = false;
 
 Devices device;
 Motors motor;
@@ -122,11 +125,13 @@ void loop() {
             dashboard.sht3xHumidity->update(val.humidity_out);
         }
 
-        String properties = Properties::GenerateJSONData(val);
-        api.PostSensorData(DEVICE_ID, properties);
+        if (API_SEND_DATA) {
+            String properties = Properties::GenerateJSONData(val);
+            api.PostSensorData(DEVICE_ID, properties);
 
-        String wifi = Properties::GenerateJSONWifiData();
-        api.PostSensorConnectionData(DEVICE_ID, wifi);
+            String wifi = Properties::GenerateJSONWifiData();
+            api.PostSensorConnectionData(DEVICE_ID, wifi);
+        }
 
         dashboard.espDash.sendUpdates();
     }
