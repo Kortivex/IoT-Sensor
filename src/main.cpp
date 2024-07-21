@@ -74,13 +74,6 @@ void setup() {
     // Start Wi-Fi connection.
     setupWiFi();
 
-    // Start HTTP Server.
-    dashboard.server.begin();
-}
-
-void loop() {
-    device.button.loop();
-
     if (API_SEND_DATA) {
         String wifi = Properties::GenerateJSONWifiData();
         api.PutSensorConnectionData(DEVICE_ID, wifi);
@@ -88,6 +81,13 @@ void loop() {
         String metaData = Properties::GenerateJSONMetaData();
         api.PutSensorMetaData(DEVICE_ID, metaData);
     }
+
+    // Start HTTP Server.
+    dashboard.server.begin();
+}
+
+void loop() {
+    device.button.loop();
 
     if (millis() - timestamp > PROPERTIES_FREQUENCY) {
         timestamp = millis();

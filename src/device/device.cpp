@@ -11,10 +11,6 @@ Devices::Devices() : lightMeter(OB_BH1750_ADDRESS), sht31(&Wire1), bme() {
     // Use the button to enter deep sleep (GPIO35).
     this->button = Button2(USER_BUTTON);
     this->button.setLongClickHandler(Sleep);
-
-    Serial.println("");
-    Serial.println("------------------------- Devices probe -------------------------");
-    Serial.println("");
 }
 
 void Devices::Probe(TwoWire &t) {

@@ -52,7 +52,7 @@ void API::PutSensorConnectionData(String &id, String &data) const {
 
 void API::processResponse(int httpCode, HTTPClient &http) {
     if (httpCode > 0) {
-        Serial.printf("Response Status Code: %d\t", httpCode);
+        Serial.printf("\nResponse Status Code: %d\t", httpCode);
 
         if (httpCode >= HTTP_CODE_OK && httpCode <= HTTP_CODE_NO_CONTENT) {
             String payload = http.getString();

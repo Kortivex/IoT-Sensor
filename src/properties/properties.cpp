@@ -75,7 +75,7 @@ bool Properties::GetSHT3xSensorEvent(Devices &device, iot_sensors_event_t &val) 
     float t = device.sht31.readTemperature();
     float h = device.sht31.readHumidity();
 
-    Serial.println("Sensor SHT3x: ");
+    Serial.println("\nSensor SHT3x: ");
     if (!isnan(t)) {  // check if 'is not a number'.
         Serial.print("Temp *C = ");
         Serial.print(t);
