@@ -9,7 +9,7 @@
 #include "api/api.h"
 
 // API REST configuration.
-String API_HOST = "https://www.postb.in/1721561966898-8253190442919";
+String API_HOST = "https://www.postb.in/1721568279341-2605438157916";
 String API_KEY = "4cae8c84-dd29-42f3-8d58-ed371f1bc8ef";
 
 // Device configuration.
@@ -19,7 +19,7 @@ String DEVICE_ID = "01J384NT10XHVGYDRXJSXRVAPK";
 bool AUTO_WATERING = false;
 
 // Enable/Disable Send Data to API REST.
-bool API_SEND_DATA = false;
+bool API_SEND_DATA = true;
 
 Devices device;
 Motors motor;
@@ -105,6 +105,9 @@ void loop() {
 
         Properties::GetVoltageSensorEvent(val);
         dashboard.batteryValue->update(val.voltage);
+
+        Properties::GetBatteryLevelEvent(val);
+        dashboard.batteryPercent->update(val.batteryPercentage);
 
         if (device.has_lightSensor) {
             Properties::GetBHT1750SensorEvent(device, val);

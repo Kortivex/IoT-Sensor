@@ -10,6 +10,7 @@
 #define DASH_SOIL_VALUE_STRING          "Soil Value"
 #define DASH_SALT_VALUE_STRING          "Salt Value"
 #define DASH_BATTERY_STRING             "Battery"
+#define DASH_BATTERY_LEVEL_STRING       "Battery Level (EMA Filter)"
 #define DASH_SHT3X_TEMPERATURE_STRING   "SHT3X Temperature"
 #define DASH_SHT3X_HUMIDITY_STRING      "SHT3X Humidity"
 #define DASH_MOTOR_CTRL_STRING          "Water pump"
@@ -21,6 +22,7 @@ public:
 
     Card *saltValue = nullptr;
     Card *batteryValue = nullptr;
+    Card *batteryPercent = nullptr;
     Card *soilValue = nullptr;
 
     Card *illumination = nullptr;

@@ -1,8 +1,9 @@
 #include "dashboard.h"
 
 Dashboard::Dashboard(int port) : server(port), espDash(&server) {
-    this->saltValue = new Card(&espDash, GENERIC_CARD, DASH_SALT_VALUE_STRING, "%");
+    this->batteryPercent = new Card(&espDash, GENERIC_CARD, DASH_BATTERY_LEVEL_STRING, "%");
     this->batteryValue = new Card(&espDash, GENERIC_CARD, DASH_BATTERY_STRING, "mV");
+    this->saltValue = new Card(&espDash, GENERIC_CARD, DASH_SALT_VALUE_STRING, "%");
     this->soilValue = new Card(&espDash, GENERIC_CARD, DASH_SOIL_VALUE_STRING, "%");
 }
 

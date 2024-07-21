@@ -24,6 +24,8 @@
 
 #define USER_BUTTON             (35)
 
+const float MAX_VOLTAGE = 4200.0f;
+
 class Devices {
 public:
     bool has_powerSensor;

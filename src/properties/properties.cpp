@@ -1,6 +1,10 @@
 #include <WiFi.h>
 #include "properties.h"
 
+float Properties::previousVoltage = 0.0f;
+float Properties::previousBatteryPercentage = 0.0f;
+constexpr float Properties::alpha;
+
 Properties::Properties() = default;
 
 bool Properties::GetSoilSensorEvent(iot_sensors_event_t &val) {
@@ -30,7 +34,21 @@ bool Properties::GetSaltSensorEvent(iot_sensors_event_t &val) {
 bool Properties::GetVoltageSensorEvent(iot_sensors_event_t &val) {
     int vRef = 1100;
     uint16_t volt = analogRead(BAT_ADC);
-    val.voltage = static_cast<float>((static_cast<double>(volt) / 4095.0) * 6.6 * vRef);
+    auto currentVoltage = static_cast<float>((static_cast<double>(volt) / 4095.0) * 6.6 * vRef);
+
+    val.voltage = alpha * currentVoltage + (1.0f - alpha) * previousVoltage;
+    previousVoltage = val.voltage;
+
+    return true;
+}
+
+bool Properties::GetBatteryLevelEvent(iot_sensors_event_t &val) {
+    float rawBatteryPercentage  = (val.voltage * 100.0f) / MAX_VOLTAGE;
+    if (rawBatteryPercentage  < 0.0f) rawBatteryPercentage  = 0.0f;
+    if (rawBatteryPercentage  > 100.0f) rawBatteryPercentage  = 100.0f;
+
+    val.batteryPercentage = alpha * rawBatteryPercentage + (1.0f - alpha) * previousBatteryPercentage;
+    previousBatteryPercentage = val.batteryPercentage;
 
     return true;
 }
@@ -81,6 +99,7 @@ bool Properties::GetSHT3xSensorEvent(Devices &device, iot_sensors_event_t &val) 
 String Properties::GenerateJSONData(iot_sensors_event_t &val) {
     JsonDocument doc;
     doc["voltage"] = val.voltage;
+    doc["battery"] = val.batteryPercentage;
     doc["soil"] = val.soil;
     doc["salt"] = val.salt;
     doc["light"] = val.light;
@@ -99,6 +118,9 @@ String Properties::GenerateJSONData(iot_sensors_event_t &val) {
 
 String Properties::GenerateJSONWifiData() {
     JsonDocument doc;
+    doc["ssid"] = WiFi.SSID();
+    doc["channel"] = WiFi.channel();
+    doc["dns"] = WiFi.dnsIP().toString();
     doc["ip"] = WiFi.localIP();
     doc["subnet"] = WiFi.subnetMask().toString();
     doc["mac"] = WiFi.macAddress();
