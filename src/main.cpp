@@ -9,7 +9,7 @@
 #include "api/api.h"
 
 // API REST configuration.
-String API_HOST = "https://www.postb.in/1721568279341-2605438157916";
+String API_HOST = "https://www.postb.in/1721576213067-9944506941828";
 String API_KEY = "4cae8c84-dd29-42f3-8d58-ed371f1bc8ef";
 
 // Device configuration.
@@ -81,6 +81,14 @@ void setup() {
 void loop() {
     device.button.loop();
 
+    if (API_SEND_DATA) {
+        String wifi = Properties::GenerateJSONWifiData();
+        api.PutSensorConnectionData(DEVICE_ID, wifi);
+
+        String metaData = Properties::GenerateJSONMetaData();
+        api.PutSensorMetaData(DEVICE_ID, metaData);
+    }
+
     if (millis() - timestamp > PROPERTIES_FREQUENCY) {
         timestamp = millis();
 
@@ -131,9 +139,6 @@ void loop() {
         if (API_SEND_DATA) {
             String properties = Properties::GenerateJSONData(val);
             api.PostSensorData(DEVICE_ID, properties);
-
-            String wifi = Properties::GenerateJSONWifiData();
-            api.PostSensorConnectionData(DEVICE_ID, wifi);
         }
 
         dashboard.espDash.sendUpdates();

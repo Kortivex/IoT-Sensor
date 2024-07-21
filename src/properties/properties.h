@@ -38,6 +38,8 @@ public:
 
     static String GenerateJSONData(iot_sensors_event_t &val);
 
+    static String GenerateJSONMetaData();
+
     static String GenerateJSONWifiData();
 
 private:

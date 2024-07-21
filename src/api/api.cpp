@@ -20,17 +20,32 @@ void API::PostSensorData(String &id, String &data) const {
     }
 }
 
-void API::PostSensorConnectionData(String &id, String &data) const {
+void API::PutSensorMetaData(String &id, String &data) const {
     if (WiFiClass::status() == WL_CONNECTED) {
         WiFiClientSecure client;
         client.setInsecure();
 
         HTTPClient https;
-        https.begin(client, this->ApiHost + "/sensors/" + id + "/connection");
+        https.begin(client, this->ApiHost + "/sensors/" + id);
         https.addHeader("Content-Type", "application/json");
         https.addHeader("Authorization", "Bearer " + this->ApiKey);
 
-        int httpCode = https.POST(data);
+        int httpCode = https.PUT(data);
+        processResponse(httpCode, https);
+    }
+}
+
+void API::PutSensorConnectionData(String &id, String &data) const {
+    if (WiFiClass::status() == WL_CONNECTED) {
+        WiFiClientSecure client;
+        client.setInsecure();
+
+        HTTPClient https;
+        https.begin(client, this->ApiHost + "/sensors/" + id);
+        https.addHeader("Content-Type", "application/json");
+        https.addHeader("Authorization", "Bearer " + this->ApiKey);
+
+        int httpCode = https.PUT(data);
         processResponse(httpCode, https);
     }
 }

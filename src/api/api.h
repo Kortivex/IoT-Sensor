@@ -11,7 +11,9 @@ public:
 
     void PostSensorData(String &id, String &data) const;
 
-    void PostSensorConnectionData(String &id, String &data) const;
+    void PutSensorConnectionData(String &id, String &data) const;
+
+    void PutSensorMetaData(String &id, String &data) const;
 
 private:
     static void processResponse(int httpCode, HTTPClient &http);

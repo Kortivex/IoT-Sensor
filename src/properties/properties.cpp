@@ -116,6 +116,18 @@ String Properties::GenerateJSONData(iot_sensors_event_t &val) {
     return data;
 }
 
+String Properties::GenerateJSONMetaData() {
+    JsonDocument doc;
+    doc["manufacturer"] = MANUFACTURER;
+    doc["firmware_version"] = FIRMWARE_VERSION;
+    doc["model_number"] = MODEL_NUMBER;
+
+    String data;
+    serializeJson(doc, data);
+
+    return data;
+}
+
 String Properties::GenerateJSONWifiData() {
     JsonDocument doc;
     doc["ssid"] = WiFi.SSID();

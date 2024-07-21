@@ -7,6 +7,10 @@
 #include "Adafruit_SHT31.h"
 #include "Adafruit_BME280.h"
 
+const String MANUFACTURER = "ESP32-DEVKIT";
+const String MODEL_NUMBER = "ESP32-206329458144";
+const float FIRMWARE_VERSION = 1.0f;
+
 #define POWER_CTRL              (4)
 
 #define I2C1_SDA                (21)
