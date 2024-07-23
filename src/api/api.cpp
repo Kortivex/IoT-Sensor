@@ -7,8 +7,10 @@ API::API(String &apiHost, String &apiKey) {
 
 void API::PostSensorData(String &id, String &data) const {
     if (WiFiClass::status() == WL_CONNECTED) {
-        WiFiClientSecure client;
-        client.setInsecure();
+       /* WiFiClientSecure client;
+        client.setInsecure();*/
+
+        WiFiClient client;
 
         HTTPClient https;
         https.begin(client, this->ApiHost + "/sensors/" + id + "/data");
@@ -22,8 +24,10 @@ void API::PostSensorData(String &id, String &data) const {
 
 void API::PutSensorMetaData(String &id, String &data) const {
     if (WiFiClass::status() == WL_CONNECTED) {
-        WiFiClientSecure client;
-        client.setInsecure();
+        /* WiFiClientSecure client;
+        client.setInsecure();*/
+
+        WiFiClient client;
 
         HTTPClient https;
         https.begin(client, this->ApiHost + "/sensors/" + id);
@@ -37,8 +41,10 @@ void API::PutSensorMetaData(String &id, String &data) const {
 
 void API::PutSensorConnectionData(String &id, String &data) const {
     if (WiFiClass::status() == WL_CONNECTED) {
-        WiFiClientSecure client;
-        client.setInsecure();
+        /* WiFiClientSecure client;
+         client.setInsecure();*/
+
+        WiFiClient client;
 
         HTTPClient https;
         https.begin(client, this->ApiHost + "/sensors/" + id);

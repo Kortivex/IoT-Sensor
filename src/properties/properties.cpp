@@ -131,7 +131,7 @@ String Properties::GenerateJSONMetaData() {
 String Properties::GenerateJSONWifiData() {
     JsonDocument doc;
     doc["ssid"] = WiFi.SSID();
-    doc["channel"] = WiFi.channel();
+    doc["channel"] = std::to_string(WiFi.channel());
     doc["dns"] = WiFi.dnsIP().toString();
     doc["ip"] = WiFi.localIP();
     doc["subnet"] = WiFi.subnetMask().toString();

@@ -8,12 +8,12 @@
 #include "properties/properties.h"
 #include "api/api.h"
 
-// API REST configuration.
-String API_HOST = "https://www.postb.in/1721576213067-9944506941828";
-String API_KEY = "4cae8c84-dd29-42f3-8d58-ed371f1bc8ef";
-
 // Device configuration.
-String DEVICE_ID = "01J384NT10XHVGYDRXJSXRVAPK";
+String DEVICE_ID = "01J3GEH1QD665A8N6322PBXKNT";
+
+// API REST configuration.
+String API_KEY = "4cae8c84-dd29-42f3-8d58-ed371f1bc8ef";
+String API_HOST = "http://192.168.50.118:47400";
 
 // Enable/Disable Auto Watering.
 bool AUTO_WATERING = false;
@@ -75,11 +75,11 @@ void setup() {
     setupWiFi();
 
     if (API_SEND_DATA) {
-        String wifi = Properties::GenerateJSONWifiData();
-        api.PutSensorConnectionData(DEVICE_ID, wifi);
-
         String metaData = Properties::GenerateJSONMetaData();
         api.PutSensorMetaData(DEVICE_ID, metaData);
+
+        String wifi = Properties::GenerateJSONWifiData();
+        api.PutSensorConnectionData(DEVICE_ID, wifi);
     }
 
     // Start HTTP Server.
