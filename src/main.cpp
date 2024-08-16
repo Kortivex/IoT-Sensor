@@ -9,11 +9,11 @@
 #include "api/api.h"
 
 // Device configuration.
-String DEVICE_ID = "01J3GEH1QD665A8N6322PBXKNT";
+String DEVICE_ID = "XXXXXXXXXXXXXXXXXXXXXXXXXX";
 
 // API REST configuration.
 String API_KEY = "4cae8c84-dd29-42f3-8d58-ed371f1bc8ef";
-String API_HOST = "http://192.168.50.118:47400";
+String API_HOST = "http://X.X.X.X:YYYYY";
 
 // Enable/Disable Auto Watering.
 bool AUTO_WATERING = false;

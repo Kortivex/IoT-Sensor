@@ -4,8 +4,8 @@
 #define SERIAL_BAUD_RATE        (115200)
 
 // Wireless SSID and Password.
-#define WIFI_SSID               "DIGIFIBRA-7GUA"
-#define WIFI_PASSWD             "xxxxxxxxxxxxxx"
+#define WIFI_SSID               "XXXXXXXXXXXX"
+#define WIFI_PASSWD             "YYYYYYYYYYYY"
 
 // Properties frequency in milliseconds.
-#define PROPERTIES_FREQUENCY     (1000)
+#define PROPERTIES_FREQUENCY     (5000)
